@@ -1,0 +1,17 @@
+.Grid--main {
+  alignment: center;
+}
+
+.Cell {
+  width: 10px;
+  height: 10px;
+  color: gray;
+}
+
+.Cell[data-type='filled'] {
+  background-color: black;
+}
+
+.Cell[data-type='empty'] {
+  background-color: white;
+}
