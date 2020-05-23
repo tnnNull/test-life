@@ -2,16 +2,36 @@
   alignment: center;
 }
 
+.Grid--table {
+  border-spacing: 1px;
+  cursor: crosshair;
+}
+
+:root {
+  --cell-size: 18px;
+}
+
 .Cell {
-  width: 10px;
-  height: 10px;
+  width: var(--cell-size);
+  height: var(--cell-size);
   color: gray;
 }
 
+.Grid--main[data-status='filling'] .Cell[data-type='filled']:hover {
+  background-color: #222;
+}
+
+.Grid--main[data-status='filling'] .Cell[data-type='empty']:hover {
+  background-color: #bbb;
+}
+
+
 .Cell[data-type='filled'] {
-  background-color: black;
+  background-color: #000;
+  /*cursor: not-allowed;*/
 }
 
 .Cell[data-type='empty'] {
-  background-color: white;
+  background-color: #fff;
+  /*cursor: crosshair;*/
 }

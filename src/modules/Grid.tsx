@@ -21,15 +21,17 @@ const Grid = (props: IProps) => {
   }
 
   return (
-    <div className="Grid--main">
+    <div className="Grid--main" data-status="filling">
       <table className="Grid--table">
         {props.actualGrid.map((rVal, rInd) => (
-          <tr className="Row">
+          <tr className="Row" key={"r" + rInd}>
             {rVal.map((val, ind) => (
               <td
                 className="Cell"
+                key={"r" + rInd + "c" + ind}
                 data-type={val ? 'filled' : 'empty'}
-                onClick={() => fillCell(rInd, ind)}
+                onMouseDown={() => fillCell(rInd, ind)}
+
               />
             ))}
           </tr>
