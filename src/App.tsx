@@ -43,10 +43,12 @@ function App() {
   }
 
   const stopSimulation = () => {
+    //setStage(Stage.Fill)
     setIntervalActivity(false)
   }
 
   const startSimulation = () => {
+    //setStage(Stage.Simulate)
     setIntervalActivity(true)
     simulationStep()
   }
