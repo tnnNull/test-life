@@ -10,7 +10,7 @@ function App() {
   const [gridSize, setSize] = useState<number>(12)
   const [isIntervalActive, setIntervalActivity] = useState(false)
   let previousWorld: number[][]
-  let intervalDelay: number = 100
+  const [intervalDelay, setDelay] = useState<number>(100)
 
   const createArea = (size: number) => {
     let pool = []
@@ -21,6 +21,10 @@ function App() {
     previousWorld = [...pool]
   }
 
+  const applyDelay = (newDelay: number) => {
+    setDelay(newDelay)
+  }
+
   const applySize = (newSize: number) => {
     stopSimulation()
     setSize(newSize)
@@ -28,12 +32,12 @@ function App() {
   }
 
   const stopSimulation = () => {
-    //setStage(Stage.Fill)
+    setStage(Stage.Fill)
     setIntervalActivity(false)
   }
 
   const startSimulation = () => {
-    //setStage(Stage.Simulate)
+    setStage(Stage.Simulate)
     setIntervalActivity(true)
     simulationStep()
   }
@@ -42,13 +46,11 @@ function App() {
     previousWorld = LU.CopyWorld(actualGrid)
 
     let newGen = LU.GetNextGeneration(previousWorld)
-    //console.log(newGen)
+
     if (JSON.stringify(newGen) === JSON.stringify(previousWorld)) {
-      console.log('Stable loop')
       stopSimulation()
     }
     if (LU.CountAlive(newGen) === 0) {
-      console.log('all dead')
       stopSimulation()
     }
 
@@ -63,46 +65,65 @@ function App() {
     createArea(gridSize)
   }, [])
 
-
   useEffect(() => {
     if (isIntervalActive) {
       simulationStep()
-    } else {
-      console.log('null fired')
     }
   }, [actualGrid])
 
-
   return (
     <div className="App">
-      <label>Size</label>
-      <input
-        type="range"
-        min="8"
-        max="32"
-        value={gridSize}
-        onChange={(e) => applySize(Number(e.target.value))}
-      />
-      <br />
-
-      {isIntervalActive ? (
-        <input
-          type="button"
-          className="startstop_button"
-          value="Stop"
-          onClick={() => stopSimulation()}
-        />
-      ) : (
-        <input
-          type="button"
-          value="Simulate"
-          className="startstop_button"
-          onClick={() => startSimulation()}
-        />
-      )}
-      <input type="button" value="Clear Area" onClick={() => createArea(gridSize)} />
-
       <main className="App-main">
+        <div className="App-controllers">
+          <div className="slider-box">
+            <label>Size</label>
+            <br />
+            <input
+              type="range"
+              min="8"
+              max="32"
+              value={gridSize}
+              onChange={(e) => applySize(Number(e.target.value))}
+            />
+            <br />
+          </div>
+          <div className="slider-box">
+            <label>Delay</label>
+            <br />
+            <input
+              type="range"
+              min="50"
+              max="2000"
+              value={intervalDelay}
+              onChange={(e) => applyDelay(Number(e.target.value))}
+            />
+            <br />
+          </div>
+          <div className="slider-box">
+            {isIntervalActive ? (
+              <input
+                type="button"
+                className="startstop_button"
+                value="Stop"
+                onClick={() => stopSimulation()}
+              />
+            ) : (
+              <input
+                type="button"
+                value="Simulate"
+                className="startstop_button"
+                onClick={() => startSimulation()}
+              />
+            )}
+            <br />
+            <input
+              type="button"
+              value="Clear Area"
+              onClick={() => createArea(gridSize)}
+            />
+          </div>
+        </div>
+
         <Grid
           setGrid={setGrid}
           actualGrid={actualGrid}

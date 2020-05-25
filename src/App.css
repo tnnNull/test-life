@@ -11,7 +11,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
 
+.App-controllers {
+  position: absolute;
+  top: 0;
+}
+
+.slider-box {
+  display: inline-block;
+  margin: 10px;
 }
 
 .startstop_button {
