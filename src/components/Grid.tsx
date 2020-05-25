@@ -1,6 +1,6 @@
 import React from 'react'
 import './Grid.css'
-import Stage from '../utils/Stage'
+import Stage from '../classes/Stage'
 
 interface IProps {
   actualGrid: number[][]
