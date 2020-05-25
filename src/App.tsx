@@ -15,7 +15,7 @@ function App() {
   const createArea = (size: number) => {
     let pool = []
     for (let i = 0; i < size; i++) {
-      pool[i] = new Array(size).fill(0)
+      pool[i] = new Array(Math.round(size*1.42)).fill(0)
     }
     setGrid(pool)
     previousWorld = [...pool]
@@ -81,7 +81,7 @@ function App() {
             <input
               type="range"
               min="8"
-              max="32"
+              max="36"
               value={gridSize}
               onChange={(e) => applySize(Number(e.target.value))}
             />
@@ -92,8 +92,8 @@ function App() {
             <br />
             <input
               type="range"
-              min="50"
-              max="2000"
+              min="20"
+              max="1000"
               value={intervalDelay}
               onChange={(e) => applyDelay(Number(e.target.value))}
             />

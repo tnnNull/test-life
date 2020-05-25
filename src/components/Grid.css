@@ -1,8 +1,9 @@
 .Grid--main {
-
 }
 
 .Grid--table {
+
+  padding-top: 20px;
   border-spacing: 1px;
   cursor: crosshair;
 }
